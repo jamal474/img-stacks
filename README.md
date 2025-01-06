@@ -4,17 +4,8 @@ A React component for creating beautiful, interactive image stacks with configur
 
 ## Demo
 
-<div align="center" style="max-width: 800px; margin: 0 auto;">
-  <div style="position:relative; width:100%; height:0px; padding-bottom:87.775%">
-    <iframe 
-      allow="fullscreen" 
-      allowfullscreen 
-      height="100%" 
-      src="https://streamable.com/e/ysooug?" 
-      width="100%" 
-      style="border:none; width:100%; height:100%; position:absolute; left:0px; top:0px; overflow:hidden;">
-    </iframe>
-  </div>
+<div align="center">
+  <img src="test-app/public/demo.gif" alt="ImgStack Demo" width="600" />
 </div>
 
 ### Demo Features
