@@ -4,9 +4,25 @@ A React component for creating beautiful, interactive image stacks with configur
 
 ## Demo
 
-https://user-images.githubusercontent.com/antibland/npm-img-stacks/assets/demo.mov
+<div align="center" style="max-width: 800px; margin: 0 auto;">
+  <div style="position:relative; width:100%; height:0px; padding-bottom:87.775%">
+    <iframe 
+      allow="fullscreen" 
+      allowfullscreen 
+      height="100%" 
+      src="https://streamable.com/e/ysooug?" 
+      width="100%" 
+      style="border:none; width:100%; height:100%; position:absolute; left:0px; top:0px; overflow:hidden;">
+    </iframe>
+  </div>
+</div>
 
-Showcase your beautiful work in an accessible image stack. Dialogs can be dismissed by pressing the escape key, the close button, or simply clicking outside of the dialog itself.
+### Demo Features
+
+- 🖱️ Hover over the stack to see the caption and animation effects
+- 🔍 Click to open the full-size image gallery
+- ⌨️ Press `Esc`, click outside, or use the close button to dismiss the dialog
+- 📱 Fully responsive and mobile-friendly
 
 ## Features
 
@@ -23,6 +39,8 @@ Showcase your beautiful work in an accessible image stack. Dialogs can be dismis
 ```bash
 npm install img-stacks
 ```
+
+---
 
 ## Usage
 
