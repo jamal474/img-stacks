@@ -1,0 +1,38 @@
+{
+  "module": "./esm/mod.js",
+  "main": "./script/mod.js",
+  "name": "img-stacks",
+  "version": "0.1.0",
+  "description": "A React component for displaying stacked images with interactive features",
+  "license": "MIT",
+  "keywords": [
+    "react",
+    "images",
+    "gallery",
+    "stack",
+    "animation"
+  ],
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/antibland/img-stacks.git"
+  },
+  "bugs": {
+    "url": "https://github.com/antibland/img-stacks/issues"
+  },
+  "peerDependencies": {
+    "react": "^17.0.0 || ^18.0.0",
+    "react-dom": "^17.0.0 || ^18.0.0"
+  },
+  "exports": {
+    ".": {
+      "import": "./esm/mod.js",
+      "require": "./script/mod.js"
+    }
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.9"
+  }
+}

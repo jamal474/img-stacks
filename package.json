@@ -1,0 +1,10 @@
+{
+  "name": "img-stacks",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "rebuild": "rm -rf npm && deno run -A _build_npm.ts 0.1.0 && cd test-app && pnpm install && pnpm link ../npm",
+    "dev": "cd test-app && pnpm dev"
+  }
+}
