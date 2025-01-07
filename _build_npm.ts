@@ -3,10 +3,11 @@
 
 import { build, emptyDir } from "https://deno.land/x/dnt@0.38.1/mod.ts";
 
-// Get version from command line arguments
-const version = Deno.args[0];
+// Read version from package.json
+const packageJson = JSON.parse(await Deno.readTextFile("./package.json"));
+const version = packageJson.version;
 if (!version) {
-  console.error("Version argument is required");
+  console.error("Version not found in package.json");
   Deno.exit(1);
 }
 
