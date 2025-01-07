@@ -3,6 +3,13 @@
 
 import { build, emptyDir } from "https://deno.land/x/dnt@0.38.1/mod.ts";
 
+// Get version from command line arguments
+const version = Deno.args[0];
+if (!version) {
+  console.error("Version argument is required");
+  Deno.exit(1);
+}
+
 async function start() {
   await emptyDir("./npm");
 
@@ -14,7 +21,7 @@ async function start() {
     },
     package: {
       name: "img-stacks",
-      version: "0.1.0",
+      version: version,
       description: "Beautiful, interactive image stacks for React",
       license: "MIT",
       repository: {

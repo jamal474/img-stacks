@@ -2,7 +2,7 @@
   "module": "./esm/main.js",
   "main": "./script/main.js",
   "name": "img-stacks",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Beautiful, interactive image stacks for React",
   "license": "MIT",
   "repository": {
