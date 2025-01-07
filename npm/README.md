@@ -1,12 +1,21 @@
-# ImgStack
+# ImgStacks
 
 A React component for creating beautiful, interactive image stacks with configurable aspect ratios and responsive behavior.
 
 ## Demo
 
-https://user-images.githubusercontent.com/antibland/npm-img-stacks/assets/demo.mov
+<div align="center">
+  <img src="https://raw.githubusercontent.com/antibland/img-stacks/refs/heads/main/test-app/public/demo.gif" alt="ImgStack Demo" width="600" />
+</div>
 
-Showcase your beautiful work in an accessible image stack. Dialogs can be dismissed by pressing the escape key, the close button, or simply clicking outside of the dialog itself.
+[Live Demo](https://antibland.github.io/img-stacks/)
+
+### Demo Features
+
+- 🖱️ Hover over the stack to see the caption and animation effects
+- 🔍 Click to open the full-size image gallery
+- ⌨️ Press `Esc`, click outside, or use the close button to dismiss the dialog
+- 📱 Fully responsive and mobile-friendly
 
 ## Features
 
@@ -23,6 +32,8 @@ Showcase your beautiful work in an accessible image stack. Dialogs can be dismis
 ```bash
 npm install img-stacks
 ```
+
+---
 
 ## Usage
 

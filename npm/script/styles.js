@@ -200,4 +200,3 @@ button {
   animation: top-elem-hover .4s cubic-bezier(.34,1.56,.64,1) .1s forwards !important;
 }
 `;
-//# sourceMappingURL=styles.js.map

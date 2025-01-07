@@ -126,4 +126,3 @@ export function ImgStack({ images, className = "", size }) {
                     React.createElement("img", { src: image.src, alt: image.alt, style: aspectRatio ? { aspectRatio } : undefined }),
                     React.createElement("figcaption", null, image.caption)))))))));
 }
-//# sourceMappingURL=mod.js.map

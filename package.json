@@ -4,7 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "rebuild": "rm -rf npm && deno run -A _build_npm.ts 0.1.0 && cd test-app && pnpm install && pnpm link ../npm",
-    "dev": "cd test-app && pnpm dev"
+    "build-all": "sh -c 'cd \"$PWD\" && echo \"🧹 Cleaning...\" && rm -rf npm && echo \"🏗️  Building...\" && deno run -A _build_npm.ts 0.1.0 && echo \"📦 Installing dependencies...\" && cd test-app && pnpm install && echo \"🔗 Linking package...\" && pnpm link ../npm && echo \"✅ Done!\"'",
+    "dev": "cd test-app && pnpm dev",
+    "prepare-publish": "sh -c 'cd \"$PWD\" && echo \"🧹 Cleaning...\" && rm -rf npm && echo \"🏗️  Building...\" && deno run -A _build_npm.ts 0.1.0 && echo \"📦 Publishing to npm...\" && cd npm && pnpm publish --access public && echo \"✅ Published!\"'"
   }
 }

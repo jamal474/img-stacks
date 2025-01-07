@@ -133,4 +133,3 @@ function ImgStack({ images, className = "", size }) {
                     react_1.default.createElement("figcaption", null, image.caption)))))))));
 }
 exports.ImgStack = ImgStack;
-//# sourceMappingURL=mod.js.map

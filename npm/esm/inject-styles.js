@@ -8,4 +8,3 @@ export function injectStyles() {
     document.head.appendChild(styleElement);
     stylesInjected = true;
 }
-//# sourceMappingURL=inject-styles.js.map

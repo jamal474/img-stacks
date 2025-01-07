@@ -12,4 +12,3 @@ function injectStyles() {
     stylesInjected = true;
 }
 exports.injectStyles = injectStyles;
-//# sourceMappingURL=inject-styles.js.map
