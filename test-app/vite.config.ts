@@ -4,5 +4,5 @@ import react from "@vitejs/plugin-react";
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: "/npm-img-stacks/", // Replace with your repo name
+  base: "/img-stacks/", // Match the repository name, not the local directory
 });
