@@ -1,12 +1,14 @@
-# ImgStack
+# ImgStacks
 
 A React component for creating beautiful, interactive image stacks with configurable aspect ratios and responsive behavior.
 
 ## Demo
 
 <div align="center">
-  <img src="test-app/public/demo.gif" alt="ImgStack Demo" width="600" />
+  <img src="https://raw.githubusercontent.com/antibland/img-stacks/refs/heads/main/test-app/public/demo.gif" alt="ImgStack Demo" width="600" />
 </div>
+
+[Live Demo](https://antibland.github.io/img-stacks/)
 
 ### Demo Features
 
