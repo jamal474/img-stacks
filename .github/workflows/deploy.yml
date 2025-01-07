@@ -22,10 +22,7 @@ jobs:
       - name: Setup Deno
         uses: denoland/setup-deno@v1
         with:
-          deno-version: v1.x
-
-      - name: Cache Deno dependencies
-        run: deno cache _build_npm.ts
+          deno-version: "1.39.1"
 
       - name: Install dependencies
         run: |
@@ -34,7 +31,8 @@ jobs:
 
       - name: Build NPM package
         run: |
-          deno run --allow-read --allow-write --allow-env --allow-net _build_npm.ts
+          rm -f deno.lock
+          deno run --allow-read --allow-write --allow-env --allow-net --no-lock _build_npm.ts
 
       - name: Build test app
         run: |
