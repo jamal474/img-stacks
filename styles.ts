@@ -54,11 +54,11 @@ button {
   position: absolute;
   width: 100%;
   height: 100%;
-  transition: transform var(--transition-speed) var(--transition-bounce);
+  transform: rotate(0deg) translate(0);
 }
 
-.project-image-wrapper:first-child {
-  transform: rotate(var(--stack-rotation)) translate(var(--stack-translate-x));
+.project-images-stack[data-in-view="true"] .project-image-wrapper {
+  animation: stack-rotate-1 0.8s cubic-bezier(0.68, -0.6, 0.32, 1.6) forwards;
 }
 
 @keyframes stack-rotate-1 {

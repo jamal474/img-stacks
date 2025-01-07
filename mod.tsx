@@ -133,14 +133,16 @@ function getAspectRatio(size: StackSizeConfig | undefined): string | undefined {
 
 export function ImgStack({ images, className = "", size }: ImgStackProps) {
   const [dialogOpen, setDialogOpen] = React.useState(false);
+  const [animatedStacks, setAnimatedStacks] = React.useState<number[]>([]);
+  const [isHovered, setIsHovered] = React.useState(false);
+  const stackRef = React.useRef<HTMLButtonElement>(null);
   const dialogRefs = React.useRef<(HTMLDialogElement | null)[]>([]);
   const buttonRefs = React.useRef<(HTMLButtonElement | null)[]>([]);
-  const [initialAnimationComplete, setInitialAnimationComplete] =
-    React.useState(false);
 
   const dimensions = React.useMemo(() => calculateDimensions(size), [size]);
   const aspectRatio = React.useMemo(() => getAspectRatio(size), [size]);
 
+  // Separate effect for styles and rotation setup
   React.useEffect(() => {
     injectStyles();
     const root = document.documentElement;
@@ -151,26 +153,66 @@ export function ImgStack({ images, className = "", size }: ImgStackProps) {
     }
   }, []);
 
+  // Separate effect for intersection observer
+  React.useEffect(() => {
+    // Wait for next frame to ensure layout is complete
+    const timeoutId = setTimeout(() => {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              // Animate stacks one by one with delays
+              images.forEach((_, index) => {
+                setTimeout(() => {
+                  setAnimatedStacks((prev) => [...prev, index]);
+                }, index * 100);
+              });
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        {
+          root: null,
+          threshold: 0,
+          rootMargin: "50px",
+        }
+      );
+
+      if (stackRef.current) {
+        observer.observe(stackRef.current);
+      }
+
+      return () => observer.disconnect();
+    }, 100); // Small delay to ensure layout is complete
+
+    return () => clearTimeout(timeoutId);
+  }, [images.length]);
+
+  // Dialog effect
   React.useEffect(() => {
     const dialog = dialogRefs.current[0];
     if (!dialog) return;
 
+    const handleTransitionEnd = (e: TransitionEvent) => {
+      if (e.propertyName === "opacity" && !dialogOpen) {
+        dialog.close();
+      }
+    };
+
+    dialog.addEventListener("transitionend", handleTransitionEnd);
+
     if (dialogOpen) {
       dialog.showModal();
-      requestAnimationFrame(() => {
-        dialog.classList.add("dialog-open");
-      });
+      // Force a reflow before adding the open class
+      void dialog.offsetWidth;
+      dialog.classList.add("dialog-open");
     } else {
       dialog.classList.remove("dialog-open");
-      // Wait for the transition to complete before closing
-      setTimeout(() => {
-        dialog.close();
-        const button = buttonRefs.current[0];
-        if (button) {
-          button.focus();
-        }
-      }, 200); // Match transition duration
     }
+
+    return () => {
+      dialog.removeEventListener("transitionend", handleTransitionEnd);
+    };
   }, [dialogOpen]);
 
   const imagesLength = images.length;
@@ -178,16 +220,20 @@ export function ImgStack({ images, className = "", size }: ImgStackProps) {
     imagesLength === 1
       ? "View 1 project image"
       : `View ${imagesLength} project images`;
+
   return (
-    <>
+    <div style={{ ...dimensions, position: "relative" }}>
       <button
         ref={(el) => {
+          stackRef.current = el;
           buttonRefs.current[0] = el;
         }}
         className={`project-images-stack ${className}`}
         onClick={() => setDialogOpen(true)}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
         aria-label={btnLabel}
-        style={dimensions}
+        style={{ position: "absolute", inset: 0 }}
       >
         {images.map((image, i) => (
           <div
@@ -202,12 +248,14 @@ export function ImgStack({ images, className = "", size }: ImgStackProps) {
                 "--stack-translate-x": `${i % 2 ? 8 : -8}px`,
                 zIndex: images.length - i,
                 transform:
-                  "rotate(var(--stack-rotation)) translate(var(--stack-translate-x))",
-                animation: !initialAnimationComplete
-                  ? `stack-rotate-1 0.8s cubic-bezier(0.68, -0.6, 0.32, 1.6) forwards ${
-                      i * 0.1
-                    }s`
-                  : undefined,
+                  i === 0 && isHovered
+                    ? "rotate(0deg) translate(0) scale(1.02)"
+                    : animatedStacks.includes(i)
+                    ? `rotate(var(--stack-rotation)) translate(var(--stack-translate-x))`
+                    : "rotate(0deg) translate(0)",
+                transition: "transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)",
+                boxShadow:
+                  i === 0 && isHovered ? "0 8px 16px #00000026" : undefined,
                 overflow: "hidden",
               } as React.CSSProperties
             }
@@ -258,6 +306,6 @@ export function ImgStack({ images, className = "", size }: ImgStackProps) {
           </div>
         </div>
       </dialog>
-    </>
+    </div>
   );
 }
