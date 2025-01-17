@@ -68,7 +68,7 @@ function App() {
         <h2>Portrait (3:4)</h2>
         <ImgStack
           images={createImages(600)}
-          size={{ type: "aspect-ratio", width: 350, ratio: "portrait" }}
+          size={{ type: "aspect-ratio", width: 300, ratio: "portrait" }}
         />
       </section>
 

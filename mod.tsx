@@ -135,12 +135,44 @@ export function ImgStack({ images, className = "", size }: ImgStackProps) {
   const [dialogOpen, setDialogOpen] = React.useState(false);
   const [animatedStacks, setAnimatedStacks] = React.useState<number[]>([]);
   const [isHovered, setIsHovered] = React.useState(false);
+  const [currentIndex, setCurrentIndex] = React.useState(0);
   const stackRef = React.useRef<HTMLButtonElement>(null);
   const dialogRefs = React.useRef<(HTMLDialogElement | null)[]>([]);
   const buttonRefs = React.useRef<(HTMLButtonElement | null)[]>([]);
+  const touchStartX = React.useRef<number | null>(null);
+  const touchMoveX = React.useRef<number | null>(null);
 
   const dimensions = React.useMemo(() => calculateDimensions(size), [size]);
   const aspectRatio = React.useMemo(() => getAspectRatio(size), [size]);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    touchMoveX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStartX.current === null || touchMoveX.current === null) return;
+
+    const deltaX = touchMoveX.current - touchStartX.current;
+    const minSwipeDistance = 50;
+
+    if (Math.abs(deltaX) > minSwipeDistance) {
+      if (deltaX < 0 && currentIndex < images.length - 1) {
+        // Swipe left - next image
+        setCurrentIndex((prev) => prev + 1);
+      } else if (deltaX > 0 && currentIndex > 0) {
+        // Swipe right - previous image
+        setCurrentIndex((prev) => prev - 1);
+      }
+    }
+
+    touchStartX.current = null;
+    touchMoveX.current = null;
+  };
 
   // Separate effect for styles and rotation setup
   React.useEffect(() => {
@@ -232,6 +264,9 @@ export function ImgStack({ images, className = "", size }: ImgStackProps) {
         onClick={() => setDialogOpen(true)}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
         aria-label={btnLabel}
         style={{ position: "absolute", inset: 0 }}
       >
@@ -239,6 +274,7 @@ export function ImgStack({ images, className = "", size }: ImgStackProps) {
           <div
             key={i}
             className="project-image-wrapper"
+            data-visible={i >= currentIndex && i <= currentIndex + 2}
             style={
               {
                 top: `${i * 4}px`,
@@ -247,21 +283,18 @@ export function ImgStack({ images, className = "", size }: ImgStackProps) {
                 }deg)`,
                 "--stack-translate-x": `${i % 2 ? 8 : -8}px`,
                 zIndex: images.length - i,
-                transform:
-                  i === 0 && isHovered
-                    ? "rotate(0deg) translate(0) scale(1.02)"
-                    : animatedStacks.includes(i)
-                    ? `rotate(var(--stack-rotation)) translate(var(--stack-translate-x))`
-                    : "rotate(0deg) translate(0)",
-                transition: "transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)",
-                boxShadow:
-                  i === 0 && isHovered ? "0 8px 16px #00000026" : undefined,
                 overflow: "hidden",
+                visibility:
+                  i >= currentIndex && i <= currentIndex + 2
+                    ? "visible"
+                    : "hidden",
               } as React.CSSProperties
             }
           >
             <img className="project-image" src={image.src} alt={image.alt} />
-            {i === 0 && <div className="project-image-caption">{btnLabel}</div>}
+            {i === currentIndex && (
+              <div className="project-image-caption">{btnLabel}</div>
+            )}
           </div>
         ))}
       </button>

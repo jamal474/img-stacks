@@ -15,7 +15,7 @@ A React component for creating beautiful, interactive image stacks with configur
 - 🖱️ Hover over the stack to see the caption and animation effects
 - 🔍 Click to open the full-size image gallery
 - ⌨️ Press `Esc`, click outside, or use the close button to dismiss the dialog
-- 📱 Fully responsive and mobile-friendly
+- 👆 Swipe left/right between images for a completely responsive experience
 
 ## Features
 
@@ -24,6 +24,7 @@ A React component for creating beautiful, interactive image stacks with configur
 - 📱 Responsive design with mobile-first approach
 - 🎭 Dark mode support
 - 🔍 Modal view for full-size images
+- 👆 Touch-optimized swipe navigation for when you don't want the full dialog experience
 - ✨ Smooth animations and transitions
 - ♿ Accessibility-friendly
 
@@ -31,6 +32,14 @@ A React component for creating beautiful, interactive image stacks with configur
 
 ```bash
 npm install img-stacks
+```
+
+```bash
+yarn add img-stacks
+```
+
+```bash
+pnpm add img-stacks
 ```
 
 ---
