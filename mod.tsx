@@ -261,6 +261,7 @@ export function ImgStack({ images, className = "", size }: ImgStackProps) {
           buttonRefs.current[0] = el;
         }}
         className={`project-images-stack ${className}`}
+        data-in-view={animatedStacks.length > 0 ? "true" : "false"}
         onClick={() => setDialogOpen(true)}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
