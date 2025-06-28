@@ -4,10 +4,16 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  img-stacks: link:../npm
+
 importers:
 
   .:
     dependencies:
+      img-stacks:
+        specifier: link:../npm
+        version: link:../npm
       react:
         specifier: ^18.3.1
         version: 18.3.1

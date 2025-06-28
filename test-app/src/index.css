@@ -35,6 +35,10 @@ h1 {
   line-height: 1.1;
 }
 
+.dialog-title {
+  color : orange;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

@@ -27,10 +27,10 @@ async function start() {
       license: "MIT",
       repository: {
         type: "git",
-        url: "git+https://github.com/antibland/img-stacks.git",
+        url: "git+https://github.com/jamal474/img-stacks.git",
       },
       bugs: {
-        url: "https://github.com/antibland/img-stacks/issues",
+        url: "https://github.com/jamal474/img-stacks/issues",
       },
       dependencies: {
         react: "^18.2.0",

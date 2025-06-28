@@ -36,6 +36,7 @@ function App() {
         <h2>Square (1:1)</h2>
         <ImgStack
           images={createImages(200)}
+          subject="Nature"
           size={{ type: "aspect-ratio", width: 200, ratio: "square" }}
         />
       </section>

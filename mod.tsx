@@ -57,6 +57,8 @@ export type StackSizeConfig = FixedSizeConfig | AspectRatioConfig;
 export interface ImgStackProps {
   /** Array of images to display in the stack */
   images: StackImage[];
+  /** Subject of the image group */
+  subject?: string;
   /** Optional CSS class name */
   className?: string;
   /**
@@ -131,7 +133,7 @@ function getAspectRatio(size: StackSizeConfig | undefined): string | undefined {
   return `${width}/${height}`;
 }
 
-export function ImgStack({ images, className = "", size }: ImgStackProps) {
+export function ImgStack({ images, subject = "Project", className = "", size }: ImgStackProps) {
   const [dialogOpen, setDialogOpen] = React.useState(false);
   const [animatedStacks, setAnimatedStacks] = React.useState<number[]>([]);
   const [isHovered, setIsHovered] = React.useState(false);
@@ -250,8 +252,8 @@ export function ImgStack({ images, className = "", size }: ImgStackProps) {
   const imagesLength = images.length;
   const btnLabel =
     imagesLength === 1
-      ? "View 1 project image"
-      : `View ${imagesLength} project images`;
+      ? `View 1 ${subject} image`
+      : `View ${imagesLength} ${subject} images`;
 
   return (
     <div style={{ ...dimensions, position: "relative" }}>
@@ -317,7 +319,7 @@ export function ImgStack({ images, className = "", size }: ImgStackProps) {
       >
         <div className="dialog-content">
           <header className="dialog-header">
-            <h2 className="dialog-title">Project Images</h2>
+            <h2 className="dialog-title">{subject} Images</h2>
             <button
               className="dialog-close"
               onClick={() => setDialogOpen(false)}
