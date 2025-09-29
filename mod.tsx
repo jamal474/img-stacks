@@ -256,7 +256,7 @@ export function ImgStack({ images, subject = "Project", className = "", size }: 
       : `View ${imagesLength} ${subject} images`;
 
   return (
-    <div style={{ ...dimensions, position: "relative" }}>
+    <div className = "img-stack-root" style={{ ...dimensions, position: "relative" }}>
       <button
         ref={(el) => {
           stackRef.current = el;

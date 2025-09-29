@@ -1,12 +1,16 @@
 export const styles = `
 /* Reset */
-*, *::before, *::after {
+
+.img-stack-root,
+.img-stack-root *, 
+.img-stack-root *::before, 
+.img-stack-root *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-button {
+.img-stack-root button {
   margin: 0;
   padding: 0;
   border: none;
@@ -16,7 +20,7 @@ button {
   outline: none;
 }
 
-:root {
+.img-stack-root {
   --color-text: #2c3e50;
   --color-background: #ffffff;
   --color-border: rgba(0, 0, 0, 0.1);
@@ -29,7 +33,7 @@ button {
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
+  .img-stack-root {
     --color-text: #ecf0f1;
     --color-background: #1a1a1a;
     --color-border: rgba(255, 255, 255, 0.1);
@@ -37,7 +41,7 @@ button {
   }
 }
 
-.project-images-stack {
+.img-stack-root .project-images-stack {
   position: relative;
   margin: var(--space-3) 0 0;
   display: flex;
@@ -51,23 +55,23 @@ button {
 }
 
 @media (hover: none) {
-  .project-images-stack {
+  .img-stack-root .project-images-stack {
     touch-action: pan-x;
   }
 
-  .project-image-caption {
+  .img-stack-root .project-image-caption {
     display: none;
   }
 }
 
-.project-image-wrapper {
+.img-stack-root .project-image-wrapper {
   position: absolute;
   width: 100%;
   height: 100%;
   transform: rotate(var(--stack-rotation)) translate(var(--stack-translate-x));
 }
 
-.project-images-stack[data-in-view="true"] .project-image-wrapper {
+.img-stack-root .project-images-stack[data-in-view="true"] .project-image-wrapper {
   animation: stack-rotate-1 0.8s cubic-bezier(0.68, -0.6, 0.32, 1.6) forwards;
 }
 
@@ -87,7 +91,7 @@ button {
   }
 }
 
-.project-image {
+.img-stack-root .project-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -95,7 +99,7 @@ button {
   border: 1px solid var(--color-border);
 }
 
-.project-image-caption {
+.img-stack-root .project-image-caption {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -110,12 +114,12 @@ button {
   text-align: center;
 }
 
-.project-images-stack:hover .project-image-caption {
+.img-stack-root .project-images-stack:hover .project-image-caption {
   opacity: 1;
   transform: translateY(0);
 }
 
-.project-dialog {
+.img-stack-root .project-dialog {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -133,41 +137,41 @@ button {
   transition: opacity .2s ease, transform .2s ease;
 }
 
-.project-dialog.dialog-open {
+.img-stack-root .project-dialog.dialog-open {
   opacity: 1;
   pointer-events: inherit;
   transform: translate(-50%, -50%) scale(1);
 }
 
-.project-dialog::backdrop {
+.img-stack-root .project-dialog::backdrop {
   background: var(--dialog-backdrop);
   opacity: 0;
   transition: opacity var(--transition-speed) var(--transition-ease);
 }
 
-.project-dialog.dialog-open::backdrop {
+.img-stack-root .project-dialog.dialog-open::backdrop {
   opacity: 1;
 }
 
-.dialog-content {
+.img-stack-root .dialog-content {
   padding: 20px;
   overflow-y: auto;
   max-height: 90vh;
 }
 
-.dialog-header {
+.img-stack-root .dialog-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
 }
 
-.dialog-title {
+.img-stack-root .dialog-title {
   margin: 0;
   font-size: 1.5rem;
 }
 
-.dialog-close {
+.img-stack-root .dialog-close {
   background: none;
   border: none;
   font-size: 1.5rem;
@@ -177,20 +181,20 @@ button {
   transition: opacity var(--transition-speed) var(--transition-ease);
 }
 
-.dialog-close:hover {
+.img-stack-root .dialog-close:hover {
   opacity: 0.7;
 }
 
-.dialog-body {
+.img-stack-root .dialog-body {
   display: grid;
   gap: 20px;
 }
 
-.dialog-body figure {
+.img-stack-root .dialog-body figure {
   margin: 0;
 }
 
-.dialog-body img {
+.img-stack-root .dialog-body img {
   width: 100%;
   height: auto;
   border-radius: 8px;
@@ -198,32 +202,32 @@ button {
   object-fit: cover;
 }
 
-.dialog-body figcaption {
+.img-stack-root .dialog-body figcaption {
   margin-top: 8px;
   text-align: center;
 }
 
-.project-images-stack:hover .project-image-wrapper:first-child {
+.img-stack-root .project-images-stack:hover .project-image-wrapper:first-child {
   animation: top-elem-hover .4s cubic-bezier(.34,1.56,.64,1) .1s forwards !important;
 }
 
 @media (hover: none) {
-  .project-image-caption {
+  .img-stack-root .project-image-caption {
     display: none;
   }
 
-  .project-images-stack:hover .project-image-wrapper:first-child {
+  .img-stack-root .project-images-stack:hover .project-image-wrapper:first-child {
     animation: none !important;
   }
 
-  .project-image-wrapper {
+  .img-stack-root .project-image-wrapper {
     opacity: 0;
     transform: translateX(30px) rotate(var(--stack-rotation)) translate(var(--stack-translate-x));
     transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
     will-change: transform, opacity;
   }
 
-  .project-image-wrapper[data-visible="true"] {
+  .img-stack-root .project-image-wrapper[data-visible="true"] {
     opacity: 1;
     transform: translateX(0) rotate(var(--stack-rotation)) translate(var(--stack-translate-x));
   }
