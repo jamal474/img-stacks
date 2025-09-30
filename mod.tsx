@@ -334,7 +334,7 @@ export function ImgStack({ images, subject = "Project", className = "", size }: 
                 <img
                   src={image.src}
                   alt={image.alt}
-                  style={aspectRatio ? { aspectRatio } : undefined}
+                  style= {image.aspectRatio ? {aspectRatio: image.aspectRatio} : (aspectRatio ? { aspectRatio } : undefined)}
                 />
                 <figcaption>{image.caption}</figcaption>
               </figure>
